@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <!--Online resources-->
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!--Code-->
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/controller.js"></script>
+    <!--Additional CSS files -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  </head>
+  <body style="width:98%" ng-app="demo">
+    <div>
+      <div class="row fixed_title">
+        <img style="margin:1cm;" src="docs/logo.png">
+        <h1 style="display:inline">Rutas de reparto</h1>
+      </div>
+      <div class="row" style="margin-top: 5cm;">
+        <div class="col-md-4 left" ng-controller="selectorController as selCtrl">
+          <table>
+            <tr>
+              <th>Seleccione los puntos de venta a agregar:</th>
+            </tr>
+            <tr ng-repeat="point in pointsSale" ng-click="selCtrl.addPoint(point)">
+              <td class="search">{{ point.name }}</td>
+            </tr>
+          </table>
+          <table style="margin:1cm 0cm;">
+            <tr>
+              <th>Puntos agregados:</th>
+            </tr>
+            <tr ng-repeat="point in pointsToAdd">
+              <td class="search">{{ point.name }}</td>
+            </tr>
+          </table>
+          <button class="generate" ng-click="getBestRoute()">Generar ruta</button>
+        </div>
+        <div class="col-md-8" id="map" style="height:70%;"></div>
+      </div>
+    </div>
+    <script>
+      createMap();
+    </script>
+  </body>
+</html>
