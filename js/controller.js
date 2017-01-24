@@ -63,11 +63,12 @@ function createMap() {
 }
 
 function addPointToMap(point) {
-  console.log(point);
-  L.geoJson(point).addTo(map);
+  L.geoJson(point,{onEachFeature: onEachFeature}).addTo(map);
 }
 
 function addLines(featureCollection) {
+  var start = { "type" : "Feature", "properties" : { "id" : 1, "name" : "Fábrica", "address" : "Sopó", "hourrange" : "L-V: 7:00am - 5:00pm", "observation" : null }, "geometry" : { "type" : "Point", "coordinates" : [-73.94186,4.911122] } };
+  L.geoJson(start,{onEachFeature: onEachFeature}).addTo(map);
   var i = 0;
   featureCollection.forEach(function(d){
     console.log(d)
@@ -90,6 +91,13 @@ function addLines(featureCollection) {
       });
     }
   }).addTo(map);
+}
+
+function onEachFeature(feature, layer) {
+  if (feature.properties && feature.properties.name) {
+    var string = feature.properties.name + " (" + feature.properties.address + ") Atención: " + feature.properties.hourrange;
+    layer.bindPopup(string);
+  }
 }
 
 // This function creates the DIV to display the additional attributes of the selected spatial object
