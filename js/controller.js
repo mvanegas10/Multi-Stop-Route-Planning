@@ -26,7 +26,7 @@
     $scope.getBestRoute = function () {
       $.ajax({
         type: 'GET',
-        url: 'http://181.60.255.206:8084/LogisticRouteService/computeDistributionRoute?distributionPoints=1,2',
+        url: 'https://181.60.255.206:8084/LogisticRouteService/computeDistributionRoute?distributionPoints=1,2',
         dataType: 'json',
         success: function (data) {
           // Get data of optimal routes  
